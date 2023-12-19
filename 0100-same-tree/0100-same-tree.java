@@ -31,11 +31,6 @@ class Solution {
        boolean right = isSameTree(p.right,q.right);
         
        return left && right;
-    
-        
-
     }
-    // public boolean leftsame(TreeNode p, TreeNode q){
-    //     if(p.val == q)
-    // }
+
 }
