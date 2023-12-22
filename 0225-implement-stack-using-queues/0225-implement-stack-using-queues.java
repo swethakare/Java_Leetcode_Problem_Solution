@@ -12,6 +12,7 @@ class MyStack {
         System.out.println("q"+q);
         for(int i = 0;i < q.size()-1;i++){
             q.add(q.remove());
+            System.out.println("qin"+q);
             
         }
         // System.out.println("r"+r);
