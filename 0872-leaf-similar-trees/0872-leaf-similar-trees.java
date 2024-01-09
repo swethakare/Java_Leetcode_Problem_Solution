@@ -20,11 +20,7 @@ class Solution {
         ar = helper(root1,ar);
         br = helper(root2,br);
 
-        if(ar.equals(br)){
-            return true;
-        }else{
-            return false;
-        }
+        return ar.equals(br);
     }
     public ArrayList<Integer> helper(TreeNode root, ArrayList<Integer> ar){
         if(root == null){
