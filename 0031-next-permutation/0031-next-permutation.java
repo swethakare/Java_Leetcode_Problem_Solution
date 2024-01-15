@@ -21,7 +21,7 @@ public class Solution {
                 }
             }
             swap(pos, pos1, nums);
-            sort(nums, pos + 1, nums.length - 1);   
+            sort(nums, pos + 1, nums.length);   
         }else{
             Arrays.sort(nums);
         }
@@ -35,6 +35,6 @@ public class Solution {
 
     public void sort(int[] nums, int start, int end) {
         // Sort the subarray
-        Arrays.sort(nums, start, end + 1);
+        Arrays.sort(nums, start, end);
     }
 }
