@@ -7,7 +7,7 @@ class Solution {
                     board[i][j] = 3; // newlydead
                 }
                 // if (board[i][j] == 1 && (lv == 2 || lv == 3)) {
-                //     board[i][j] = 2; // newlyalive
+                //     board[i][j] = 2; // newlyalive // no need to change the already alive cell ingone the cell updation.
                 // }
                 if (board[i][j] == 1 && lv > 3) {
                     board[i][j] = 3; // newlydead
