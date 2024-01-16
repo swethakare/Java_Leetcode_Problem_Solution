@@ -12,7 +12,6 @@ class Solution {
     }
     public int[][] reverseRow(int[][] matrix){
         int startrow = 0;
-        // int endrow = matrix.length-1;
         while(startrow < matrix.length){
             int startcol = 0;
             int endcol = matrix[0].length-1;
