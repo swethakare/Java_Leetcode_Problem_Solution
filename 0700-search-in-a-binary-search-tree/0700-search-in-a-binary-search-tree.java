@@ -19,7 +19,6 @@ class Solution {
             return root;
         }
         if(root.val == val){
-            System.out.println(root.val);
             return root;
         }
         if(val < root.val){
