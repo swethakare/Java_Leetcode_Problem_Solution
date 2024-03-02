@@ -16,7 +16,8 @@ class Solution {
             return dp[n];
         }
         if (dp[n] == -1) {
-            dp[n] = helper(dp, n - 1) + helper(dp, n - 2);
+        
+            dp[n] = helper(dp,n-1) + helper(dp,n-2);
         }
         return dp[n];
     }
