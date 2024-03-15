@@ -10,35 +10,27 @@ class Solution {
         ArrayList<Integer> ar = new ArrayList<Integer>();
         
         while (top <= bottom && left <= right) {
-            // Traverse top row
-            for (int col = left; col <= right; col++) {
-                ar.add(matrix[top][col]);  
-            }
+             for(int col = left; col <= right; col++){
+                 ar.add(matrix[top][col]);
+             }
             top++;
-            
-            // Traverse right column
-            for (int row = top; row <= bottom; row++) {
+            for(int row = top; row <= bottom; row++){
                 ar.add(matrix[row][right]);
             }
             right--;
-            
-            // Traverse bottom row
-            if (top <= bottom) { // Ensure top and bottom haven't crossed
-                for (int col = right; col >= left; col--) {
-                    ar.add(matrix[bottom][col]);
+            if( top <= bottom){
+                for(int col = right; col >= left; col--){
+                ar.add(matrix[bottom][col]);
                 }
-                bottom--;
+                bottom--;   
             }
-            
-            // Traverse left column
-            if (left <= right) { // Ensure left and right haven't crossed
-                for (int row = bottom; row >= top; row--) {
-                    ar.add(matrix[row][left]);
-                }
-                left++;
+            if(left <= right){
+              for(int row = bottom; row >= top; row--){
+                  ar.add(matrix[row][left]);
+              }
+              left++;  
             }
         }
-        
         return ar;
     }
 }
