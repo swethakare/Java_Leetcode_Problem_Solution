@@ -1,55 +1,54 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
         for (int i = 0; i < 9; i++) {
-            if (!isValidRow(board, i) || !isValidColumn(board, i) || !isValidGrid(board, i))
+            if (!isValidRow(board, i) || !isValidCol(board, i) || !isValidGrid(board, i))
                 return false;
         }
         return true;
     }
-    
-    private boolean isValidRow(char[][] board, int row) {
-        boolean[] used = new boolean[9];
-        for (int col = 0; col < 9; col++) {
-            char digit = board[row][col];
-            if (digit != '.') {
-                if (used[digit - '1']) {
-                    return false; // Found a duplicate
+    boolean isValidRow(char[][] board, int col){
+        boolean used[] = new boolean[9];
+        for(int i = 0 ; i < 9; i++){
+            char digit = board[i][col];
+            if(digit != '.'){
+                if(used[digit - '1']){
+                    return false;
                 }
                 used[digit - '1'] = true;
             }
         }
         return true;
     }
-    
-    private boolean isValidColumn(char[][] board, int col) {
-        boolean[] used = new boolean[9];
-        for (int row = 0; row < 9; row++) {
-            char digit = board[row][col];
-            if (digit != '.') {
-                if (used[digit - '1']) {
-                    return false; // Found a duplicate
+    boolean isValidCol(char[][] board, int row){
+        boolean used[] = new boolean[9];
+        for(int i = 0; i < 9; i++){
+            char digit = board[row][i];
+            if(digit != '.'){
+                if(used[digit - '1']){
+                    return false;
                 }
                 used[digit - '1'] = true;
             }
         }
         return true;
     }
-    
-    private boolean isValidGrid(char[][] board, int grid) {
-        boolean[] used = new boolean[9];
-        int rowStart = (grid / 3) * 3;
-        int colStart = (grid % 3) * 3;
-        for (int row = rowStart; row < rowStart + 3; row++) {
-            for (int col = colStart; col < colStart + 3; col++) {
-                char digit = board[row][col];
-                if (digit != '.') {
-                    if (used[digit - '1']) {
-                        return false; // Found a duplicate
+    boolean isValidGrid(char[][] board, int i){
+        boolean used[] = new boolean[9];
+        int rowstart = (i / 3)*3;
+        int colstart = (i % 3)*3;
+        for(int row = rowstart; row < rowstart+3; row++){
+                for(int col = colstart; col <colstart+3; col++){
+                    char digit = board[row][col];
+                    if(digit !='.'){
+                        if(used[digit - '1']){
+                            return false;
+                        }
+                        used[digit -'1'] = true;
                     }
-                    used[digit - '1'] = true;
                 }
             }
-        }
         return true;
     }
 }
+    
+    
