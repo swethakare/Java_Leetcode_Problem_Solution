@@ -2,27 +2,35 @@ import java.util.ArrayList;
 
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        ArrayList<Integer> ar = new ArrayList<>();
-        ListNode cur = head;
-        
-        // Copy the values of the linked list to the ArrayList
-        while(cur != null){
-            ar.add(cur.val);
-            cur = cur.next;
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode comp = head;
+        while(fast != null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        
-        // Check if the ArrayList is a palindrome
-        int start = 0;
-        int end = ar.size() - 1;
-        
-        while (start < end) {
-            if (!ar.get(start).equals(ar.get(end))) {
+        ListNode rev = reverse(slow);
+        while(rev != null){
+            if(comp.val != rev.val){
                 return false;
             }
-            start++;
-            end--;
+            comp = comp.next;
+            rev = rev.next;
         }
-        
         return true;
+        
+    }
+    ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
+        ListNode next = head;
+        
+        while(cur != null){
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
     }
 }
