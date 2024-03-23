@@ -1,42 +1,53 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
     public void reorderList(ListNode head) {
-        ListNode start = head;
-        ListNode end = head;
-        ListNode prevend = null;
-        int len = 0;
-        while(end.next != null){
-            end = end.next;
-            len++;
+        if (head == null || head.next == null) {
+            return; // No need to reorder if the list is empty or has only one node
         }
-        if(len < 2 || head == null){
-            return;
+
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prevSlow = null;
+
+        // Find the middle of the list using the slow and fast pointers
+        while (fast != null && fast.next != null) {
+            prevSlow = slow;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        int i = 0 ;
-        ListNode dummy = null;
-        while(i < len){
-             dummy = start;
-             while(dummy.next != null){
-                prevend = dummy;
-                dummy = dummy.next;
-            }
-            prevend.next = null;
-            dummy.next = start.next;
-            start.next = dummy;
-            start = start.next.next;
-            i++;
-            len--; 
+
+        // Split the list into two halves
+        ListNode right = slow.next;
+        slow.next = null; // Break the link from the first half to the second half
+
+        // Reverse the second half of the list
+        ListNode reversedSecondHalf = reverse(right);
+
+        // Merge the two halves of the list
+        merge(head, reversedSecondHalf);
+    }
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
         }
-        
-        
+        return prev;
+    }
+
+    // Helper function to merge two linked lists alternately
+    private void merge(ListNode first, ListNode second) {
+        while (first != null && second != null) {
+            ListNode temp1 = first.next;
+            ListNode temp2 = second.next;
+
+            first.next = second;
+            second.next = temp1;
+
+            first = temp1;
+            second = temp2;
+        }
     }
 }
