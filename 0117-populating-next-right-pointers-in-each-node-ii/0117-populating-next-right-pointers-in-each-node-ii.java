@@ -4,27 +4,27 @@ class Solution {
             return root;
         }
         
-        LinkedList<Node> queue = new LinkedList<>();
-        queue.add(root);
-        
-        while(!queue.isEmpty()) {
-            int size = queue.size();
+        LinkedList<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int size = q.size();
             Node prev = null;
-            for(int i = 0; i < size; i++) {
-                Node cur = queue.poll();
-                if(prev != null) {
+            for(int i = 0 ; i < size; i++){
+                Node cur = q.poll();
+                if(prev!=null){
                     prev.next = cur;
                 }
                 prev = cur;
-                if(cur.left != null) {
-                    queue.add(cur.left);
+                if(cur.left != null){
+                    q.add(cur.left);
                 }
-                if(cur.right != null) {
-                    queue.add(cur.right);
+                
+                if(cur.right != null){
+                    q.add(cur.right);
                 }
+                
             }
         }
-        
         return root;
     }
 }
