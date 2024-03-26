@@ -18,26 +18,12 @@ class Solution {
         if(root == null){
             return 0;
         }
+        int left = countNodes(root.left);
+        int right = countNodes(root.right);
         
-        LinkedList<TreeNode> q = new LinkedList<>();
+        return 1+left+right;
         
-        q.add(root);
-        int cnt = 1;
-        while(!q.isEmpty()){
-            int size = q.size();
-            for(int i = 0 ; i < size; i++){
-                TreeNode cur = q.poll();
-                if(cur.left != null){
-                    q.add(cur.left);
-                    cnt++;
-                }
-                if(cur.right != null){
-                    q.add(cur.right);
-                    cnt++;
-                }
-            }
-        }
-        return cnt;
+        
         
         
     }
