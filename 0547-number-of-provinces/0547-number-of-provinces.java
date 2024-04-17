@@ -18,7 +18,6 @@ class Solution {
                 }
             }
         }
-
         int[] visited = new int[isConnected.length];
         int cnt = 0;
 
