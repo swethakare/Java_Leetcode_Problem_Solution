@@ -1,53 +1,67 @@
-class Coordinate {
-    int row;
-    int col;
+class item {
+    int x, y, t;
 
-    public Coordinate(int row, int col) {
-        this.row = row;
-        this.col = col;
+    item(int x, int y, int t) {
+        this.x = x;
+        this.y = y;
+        this.t = t;
     }
 }
 
 class Solution {
     public int orangesRotting(int[][] grid) {
-        int count = 0;
-        Queue<Coordinate> q = new LinkedList<>();
-
-        int m = grid.length;
-        int n = grid[0].length;
-
-        // Find the rotten oranges and enqueue them
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        Queue<item> q = new LinkedList<>();
+        int[][] vis = new int[grid.length][grid[0].length];
+        int max = -1;
+        int fo = 0;
+        
+        // Adding initial rotten oranges to the queue and marking them as visited
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 2) {
-                    q.add(new Coordinate(i, j));
-                } else if (grid[i][j] == 1) {
-                    count++;
+                    q.add(new item(i, j, 0));
+                    vis[i][j] = 1;
+                }else if(grid[i][j]==1){
+                    fo++;
                 }
             }
         }
-
-        int min = 0;
-        int[][] dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}}; // Left, Up, Right, Down
-
-        while (!q.isEmpty() && count > 0) {
-            int size = q.size();
-            for (int i = 0; i < size; i++) {
-                Coordinate temp = q.poll();
-                for (int[] dir : dirs) {
-                    int newRow = temp.row + dir[0];
-                    int newCol = temp.col + dir[1];
-
-                    if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && grid[newRow][newCol] == 1) {
-                        grid[newRow][newCol] = 2; // Rotten the fresh orange
-                        count--; // Decrease the count of fresh oranges
-                        q.add(new Coordinate(newRow, newCol)); // Add the new rotten orange to the queue
-                    }
-                }
-            }
-            min++;
+        if(fo == 0){
+            return 0;
         }
 
-        return count == 0 ? min : -1; // Return minutes or -1 if there are still fresh oranges
+        while (!q.isEmpty()) {
+            item it = q.poll();
+            int t = it.t;
+            max = Math.max(t, max);
+            int row = it.x;
+            int col = it.y;
+       
+            if (row - 1 >= 0 && grid[row - 1][col] == 1 && vis[row - 1][col] == 0) {
+                q.add(new item(row - 1, col, t + 1));
+                vis[row - 1][col] = 1;
+                fo--;
+            }
+            if (row + 1 < grid.length && grid[row + 1][col] == 1 && vis[row + 1][col] == 0) {
+                q.add(new item(row + 1, col, t + 1));
+                vis[row + 1][col] = 1;
+                fo--;
+            }
+            if (col - 1 >= 0 && grid[row][col - 1] == 1 && vis[row][col - 1] == 0) {
+                q.add(new item(row, col - 1, t + 1));
+                vis[row][col - 1] = 1;
+                fo--;
+            }
+            if (col + 1 < grid[0].length && grid[row][col + 1] == 1 && vis[row][col + 1] == 0) {
+                q.add(new item(row, col + 1, t + 1));
+                vis[row][col + 1] = 1;
+                fo--;
+            }
+        }
+        if(fo > 0){
+            return -1;
+        }else{
+            return max;
+        }
     }
 }
