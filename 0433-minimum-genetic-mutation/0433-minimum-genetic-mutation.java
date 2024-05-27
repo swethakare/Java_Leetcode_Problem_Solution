@@ -14,7 +14,6 @@ class Solution {
         for(int i = 0; i < bank.length; i++){
             bnk.add(bank[i]);
         }
-        // System.out.println(bnk);
         int[] dis = new int[bank.length];
         for(int i = 0; i < bank.length; i++){
             if(bank[i] == startGene){
@@ -34,7 +33,6 @@ class Solution {
                 for(int j = 0; j < ds.length; j++){
                     if(newstr[i] != ds[j]){
                         newstr[i] = ds[j];
-                        // System.out.println(String.valueOf(newstr));
                         if(bnk.contains(String.valueOf(newstr))){
                             String ite = new String(newstr);
                             if(ite.equals(endGene)){ 
