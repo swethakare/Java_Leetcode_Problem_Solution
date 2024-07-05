@@ -3,12 +3,8 @@ import java.util.*;
 class Solution {
     public int longestStrChain(String[] words) {
         Arrays.sort(words, Comparator.comparingInt(String::length));
-        for(int i = 0; i < words.length; i++){
-            System.out.println(words[i]);
-        }
         int[] dp = new int[words.length];
-        Arrays.fill(dp, 1); // Initialize dp array with 1 because each word is at least a chain of length 1
-        
+        Arrays.fill(dp, 1);
         int maxlen = 1;
         
         for (int i = 0; i < words.length; i++) {
