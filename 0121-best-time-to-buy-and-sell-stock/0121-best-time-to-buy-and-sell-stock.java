@@ -5,8 +5,12 @@ class Solution {
         for(int i = 1; i < prices.length; i++){
             int cost = prices[i] - mini;
             max = Math.max(max,cost);
-            mini = Math.min(mini,prices[i]);
+            if(prices[i] < mini){
+                mini = prices[i];
+            }
+        
         }
         return max;
+
     }
 }
