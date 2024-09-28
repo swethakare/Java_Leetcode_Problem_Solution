@@ -14,20 +14,20 @@
  * }
  */
 class Solution {
-    int max = 0;
+    int diameter = 0;
     public int diameterOfBinaryTree(TreeNode root) {
-        depthfinder(root);
-        return max;
+       
+        height(root);
+        return diameter;
     }
-    public int depthfinder(TreeNode root){
+    public int height(TreeNode root){
         if(root==null){
             return 0;
         }
-        int left = depthfinder(root.left);
-        int right = depthfinder(root.right);
-        max = Math.max(left+right,max); // this line ensures we get the hight at each node.
-        // System.out.println(max);
+        int left = height(root.left);
+        int right = height(root.right);
         
-        return 1+Math.max(left,right);
+        diameter = Math.max(diameter, left + right);
+        return 1+ Math.max(left,right);
     }
 }
