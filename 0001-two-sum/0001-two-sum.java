@@ -8,10 +8,10 @@ class Solution {
             if(mp.containsKey(sum)){
                 temp[0] = mp.get(sum);
                 temp[1] = i;
-                return temp;
+            }else{
+                mp.put(nums[i],i);
             }
-            mp.put(nums[i],i);
-            
+
         }
         return temp;
     }
